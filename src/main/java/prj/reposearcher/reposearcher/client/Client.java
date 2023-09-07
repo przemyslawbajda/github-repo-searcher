@@ -8,11 +8,14 @@ import java.util.List;
 
 public abstract class Client {
 
-    // WebClient or RestTemplate
     protected WebClient webClient;
 
-     public abstract List<Repository> getRepositoriesByUsername(String username);
-     public abstract List<Branch> getBranchesByRepositoryAndUsername(String repositoryName, String username);
+    public Client() {
+        this.webClient = WebClient.builder().build();
+    }
+
+    public abstract List<Repository> getRepositoriesByUsername(String username);
+    public abstract List<Branch> getBranchesByRepositoryAndUsername(String repositoryName, String username);
 
 
 }

@@ -1,10 +1,35 @@
 package prj.reposearcher.reposearcher.repository;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
+import java.util.Map;
 
 public class Repository {
 
-    String name;
-    String ownerName;
-    List<Branch> branchList;
+    private String name;
+    private String ownerName;
+    private List<Branch> branchList;
+    private Boolean fork;
+
+    @JsonProperty("owner")
+    private void unpackOwnerNestedObject(Map<String, String> owner){
+        this.ownerName = owner.get("login");
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public List<Branch> getBranchList() {
+        return branchList;
+    }
+
+    public Boolean getFork() {
+        return fork;
+    }
 }
