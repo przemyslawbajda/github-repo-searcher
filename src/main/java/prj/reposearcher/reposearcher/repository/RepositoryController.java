@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import prj.reposearcher.reposearcher.client.GithubClient;
+
 
 import java.util.List;
 
@@ -13,15 +13,15 @@ import java.util.List;
 @RequestMapping("api/")
 public class RepositoryController {
 
-    private final GithubClient githubClient;
+    private final RepositoryService repositoryService;
 
-    public RepositoryController(GithubClient githubClient) {
-        this.githubClient = githubClient;
+    public RepositoryController(RepositoryService repositoryService) {
+        this.repositoryService = repositoryService;
     }
 
     @GetMapping("repositories/{username}")
     public ResponseEntity<List<Repository>> getRepositoriesByUsername(@PathVariable String username){
 
-        return ResponseEntity.ok(githubClient.getRepositoriesByUsername(username));
+        return ResponseEntity.ok(repositoryService.getNotForkedRepositoriesByUsername(username));
     }
 }
