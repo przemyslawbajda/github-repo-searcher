@@ -25,13 +25,10 @@ public class GithubClient extends Client {
                         .getUrl()
                         .getRepositories();
 
-        List<Repository> response = webClient.get()
-                .uri(url, username)
-                .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<List<Repository>>() {
-                }).block();
-        
-        return response;
+        ParameterizedTypeReference<List<Repository>> responseType =
+                new ParameterizedTypeReference<>() {};
+
+        return makeGetRequest(url, responseType, username);
     }
 
     @Override
@@ -41,11 +38,19 @@ public class GithubClient extends Client {
                             .getUrl()
                             .getBranches();
 
+        ParameterizedTypeReference<List<Branch>> responseType =
+                new ParameterizedTypeReference<>() {};
+
+        return makeGetRequest(url, responseType,
+                username, repositoryName);
+    }
+
+    private <T> List<T> makeGetRequest(String url, ParameterizedTypeReference<List<T>> responseType, String... args){
 
         return webClient.get()
-                .uri(url, username, repositoryName)
+                .uri(url, args)
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<List<Branch>>() {
-                }).block();
+                .bodyToMono(responseType)
+                .block();
     }
 }
