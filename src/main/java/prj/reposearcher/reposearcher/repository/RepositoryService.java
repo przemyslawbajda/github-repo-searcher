@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import prj.reposearcher.reposearcher.client.GithubClient;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RepositoryService {
@@ -16,14 +17,14 @@ public class RepositoryService {
 
     public List<Repository> getNotForkedRepositoriesByUsername(String username){
 
-        List<Repository> repositoryList = githubClient.getRepositoriesByUsername(username);
+        List<Repository> repositoryList = githubClient.getRepositoriesByUsername(username)
+                                                        .stream()
+                                                        .filter(repo -> !repo.isFork())
+                                                        .collect(Collectors.toList());
 
-        repositoryList.stream()
-                .filter(repo -> !repo.isFork())
-                .toList()
-                .forEach(repo -> repo.setBranchList(
-                                githubClient.getBranchesByRepositoryAndUsername(repo.getName(), repo.getOwnerName()))
-                );
+        repositoryList.forEach(repo -> repo.setBranchList(
+                githubClient.getBranchesByRepositoryAndUsername(repo.getName(), repo.getOwnerName()))
+        );
 
         return  repositoryList;
     }
