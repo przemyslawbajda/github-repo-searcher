@@ -29,7 +29,11 @@ public class Repository {
         return branchList;
     }
 
-    public Boolean getFork() {
+    public void setBranchList(List<Branch> branchList) {
+        this.branchList = branchList;
+    }
+
+    public Boolean isFork() {
         return fork;
     }
 }
