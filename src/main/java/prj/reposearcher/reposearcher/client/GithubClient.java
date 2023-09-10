@@ -2,8 +2,8 @@ package prj.reposearcher.reposearcher.client;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
-import prj.reposearcher.reposearcher.repository.Branch;
-import prj.reposearcher.reposearcher.repository.Repository;
+import prj.reposearcher.reposearcher.coderepository.dto.Branch;
+import prj.reposearcher.reposearcher.coderepository.dto.CodeRepository;
 
 import java.util.List;
 
@@ -19,13 +19,13 @@ public class GithubClient extends Client {
     }
 
     @Override
-    public List<Repository> getRepositoriesByUsername(String username) {
+    public List<CodeRepository> getRepositoriesByUsername(String username) {
 
         String url = githubProperties
                         .getUrl()
                         .getRepositories();
 
-        ParameterizedTypeReference<List<Repository>> responseType =
+        ParameterizedTypeReference<List<CodeRepository>> responseType =
                 new ParameterizedTypeReference<>() {};
 
         return makeGetRequest(url, responseType, username);

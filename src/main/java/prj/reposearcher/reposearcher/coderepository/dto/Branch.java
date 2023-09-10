@@ -1,4 +1,4 @@
-package prj.reposearcher.reposearcher.repository;
+package prj.reposearcher.reposearcher.coderepository.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,8 +10,8 @@ public class Branch {
     String commitSha;
 
     @JsonProperty("commit")
-    private void unpackCommitNestedObject(Map<String, String> owner){
-        this.commitSha = owner.get("sha");
+    private void unpackCommitNestedObject(Map<String, String> commit){
+        this.commitSha = commit.get("sha");
     }
 
     public String getName() {

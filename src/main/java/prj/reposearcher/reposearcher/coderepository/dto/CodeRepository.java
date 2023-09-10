@@ -1,11 +1,11 @@
-package prj.reposearcher.reposearcher.repository;
+package prj.reposearcher.reposearcher.coderepository.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 import java.util.Map;
 
-public class Repository {
+public class CodeRepository {
 
     private String name;
     private String ownerName;
