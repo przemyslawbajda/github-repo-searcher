@@ -38,7 +38,7 @@ class CodeRepositoryService {
         try {
             return githubClient.getRepositoriesByUsername(username);
         } catch (WebClientResponseException.NotFound ex) {
-            throw new UserNotFoundException();
+            throw new UserNotFoundException("Failed to download repositories info: user does not exists",ex);
         }
     }
 
