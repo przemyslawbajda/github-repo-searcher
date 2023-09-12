@@ -12,6 +12,12 @@ public class CodeRepository {
     private List<Branch> branchList;
     private Boolean fork;
 
+    public CodeRepository(String name, String ownerName, Boolean fork) {
+        this.name = name;
+        this.ownerName = ownerName;
+        this.fork = fork;
+    }
+
     @JsonProperty("owner")
     private void unpackOwnerNestedObject(Map<String, String> owner){
         this.ownerName = owner.get("login");

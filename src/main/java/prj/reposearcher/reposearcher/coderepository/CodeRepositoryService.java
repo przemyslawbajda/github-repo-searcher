@@ -42,7 +42,7 @@ class CodeRepositoryService {
         }
     }
 
-    private static List<CodeRepository> getNotForkedRepositories(List<CodeRepository> codeRepositories) {
+    private List<CodeRepository> getNotForkedRepositories(List<CodeRepository> codeRepositories) {
         return codeRepositories.stream()
                 .filter(repo -> !repo.isFork())
                 .collect(Collectors.toList());
