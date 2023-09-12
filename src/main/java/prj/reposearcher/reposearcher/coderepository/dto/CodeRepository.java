@@ -12,6 +12,9 @@ public class CodeRepository {
     private List<Branch> branchList;
     private Boolean fork;
 
+    public CodeRepository() {
+    }
+
     public CodeRepository(String name, String ownerName, Boolean fork) {
         this.name = name;
         this.ownerName = ownerName;

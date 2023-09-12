@@ -15,7 +15,7 @@ public class RestExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorMessage handle(UserNotFoundException exception) {
         return new ErrorMessage(HttpStatus.NOT_FOUND.name(),
-                                    exception.getMessage());
+                                    exception.getMessage() + " (" + exception.getCause().getMessage() + ")");
     }
 
     @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
